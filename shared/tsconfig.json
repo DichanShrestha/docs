@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",                // Modern JS target (can use newer versions too)
+    "module": "ESNext",               // Use ES module system (import/export)
+    "moduleResolution": "node",       // Resolve modules like Node.js
+    "esModuleInterop": true,          // Allow default imports from CommonJS
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,                   // Enable all strict type-checking options
+    "skipLibCheck": true,             // Skip type checks on all declaration files
+    "resolveJsonModule": true,        // Allow importing JSON files
+    "isolatedModules": true,          // For tools like Babel or TS transpile per file
+    "noEmit": true,                   // Do not emit JS, only type-check (optional)
+    "types": ["node"]                 // Include Node.js types, so process/env etc work
+  },
+  "include": ["src/**/*", "../src/**/*"], // Include both local and parent src folders
+  "exclude": ["node_modules", "dist"]
+}

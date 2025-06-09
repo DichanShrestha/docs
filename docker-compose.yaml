@@ -1,0 +1,118 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - app_net
+    depends_on:
+      - ws-1
+      - ws-2
+      - ws-3
+
+  client:
+    build:
+      context: ./client
+      target: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - app_net
+
+  http:
+    build:
+      context: ./http
+      target: development
+    ports:
+      - "8080:8080"
+    networks:
+      - app_net
+    depends_on:
+      - database
+      - redis
+    volumes:
+      - ./http:/usr/src/app
+      - /usr/src/app/node_modules
+
+  # Define 3 WebSocket server replicas
+  ws-1:
+    build:
+      context: ./ws
+      target: development
+    ports:
+      - "8001:8000"
+    networks:
+      - app_net
+    environment:
+      - APP_NAME=ws-1
+      - NODE_ID=1
+    volumes:
+      - ./ws:/usr/src/app
+      - /usr/src/app/node_modules
+
+  ws-2:
+    build:
+      context: ./ws
+      target: development
+    ports:
+      - "8002:8000"
+    networks:
+      - app_net
+    environment:
+      - APP_NAME=ws-2
+      - NODE_ID=2
+    volumes:
+      - ./ws:/usr/src/app
+      - /usr/src/app/node_modules
+
+  ws-3:
+    build:
+      context: ./ws
+      target: development
+    ports:
+      - "8003:8000"
+    networks:
+      - app_net
+    environment:
+      - APP_NAME=ws-3
+      - NODE_ID=3
+    volumes:
+      - ./ws:/usr/src/app
+      - /usr/src/app/node_modules
+
+  database:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - docs_database:/data/db
+    networks:
+      - app_net
+    environment:
+      - MONGO_URI=mongodb://database:27017/docs-db
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis:/data/redis
+    networks:
+      - app_net
+
+volumes:
+  docs_database:
+  redis:
+
+
+networks:
+  app_net:
+    driver: bridge

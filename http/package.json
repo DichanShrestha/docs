@@ -1,0 +1,33 @@
+{
+  "name": "http",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx esbuild src/index.ts --bundle --outfile=dist/index.js --platform=node --tsconfig=tsconfig.json",
+    "start": "node dist/index.js && node src/controllers/redisListener.controllers.ts ",
+    "dev": "nodemon --watch src src/index.ts && node src/controllers/redisListener.controllers.ts ",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@clerk/backend": "^1.29.0",
+    "@clerk/clerk-sdk-node": "^5.1.6",
+    "@types/express": "^5.0.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "ioredis": "^5.6.1",
+    "mongoose": "^8.13.2",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2"
+  }
+}

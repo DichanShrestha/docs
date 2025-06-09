@@ -1,0 +1,17 @@
+export enum ApiStatus {
+  SUCCESS = "success",
+  ERROR = "error",
+  PENDING = "pending",
+  FAILED = "failed",
+  LOADING = "loading",
+  IDLE = "idle",
+  AUTHENTICATED = "authenticated",
+  UNAUTHENTICATED = "unauthenticated",
+  UNAUTHORIZED = "unauthorized",
+  FORBIDDEN = "forbidden",
+  NOT_FOUND = "not_found",
+  BAD_REQUEST = "bad_request",
+  UNPROCESSABLE_ENTITY = "unprocessable_entity",
+  INTERNAL_SERVER_ERROR = "internal_server_error",
+  SERVICE_UNAVAILABLE = "service_unavailable",
+}

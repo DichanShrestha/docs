@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "rootDir": "../",                // go one level up to /docs
+    "module": "NodeNext",
+    "moduleDetection": "force",
+    "moduleResolution": "NodeNext",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",                 // base relative to tsconfig location (ws folder)
+    "paths": {
+      "@shared/*": ["../shared/*"]  // alias for imports from shared folder
+    }
+  },
+  "include": ["src", "../shared"]   // include both ws/src and shared folders
+}
